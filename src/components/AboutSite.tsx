@@ -1,7 +1,7 @@
 import { css } from '@emotion/css'
 import { ReactNode } from 'react'
-import CloseIcon from '../../../public/close.svg'
-import QuestionMarkIcon from '../../../public/questionMark.svg'
+import CloseIcon from '../../public/close.svg'
+import QuestionMarkIcon from '../../public/questionMark.svg'
 type Props = {
   isVisible: boolean
   isOpen: boolean

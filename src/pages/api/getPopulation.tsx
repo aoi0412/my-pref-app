@@ -14,11 +14,12 @@ type Props = {
 
 export const getPopulation = (props: Props) => {
   const url = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${props.prefCode}`
-  if (process.env.REACT_APP_RESAS_API_KEY) {
+  if (process.env.NEXT_PUBLIC_RESAS_API_KEY) {
     axios
       .get(url, {
         headers: {
-          'X-API-KEY': process.env.REACT_APP_RESAS_API_KEY,
+          'X-API-KEY':
+            process.env.NEXT_PUBLIC_RESAS_API_KEY,
         },
       })
       .then(

@@ -21,7 +21,7 @@ const AboutSite = ({
 }: Props) => {
   console.log(isOpen)
   return (
-    <div className={styles.component}>
+    <div className={styles.component(isOpen)}>
       <div
         onClick={onPress}
         className={styles.modalContainer(isVisible, isOpen)}
@@ -62,11 +62,12 @@ const AboutSite = ({
 }
 
 const styles = {
-  component: css`
+  component: (isOpen: boolean) => css`
+    transition: all 1s ease-in-out;
     width: 100%;
     height: 100%;
     position: relative;
-    z-index: 0;
+    z-index: ${isOpen ? 2 : 0};
   `,
   modalContainer: (
     isVisible: boolean,

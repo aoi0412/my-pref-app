@@ -1,4 +1,4 @@
-import GraphContainer from '@/components/elements/GraphContainer'
+import GraphContainer from '@/components/GraphContainer'
 import { selectedPref } from '@/types'
 
 const GraphContainerFeatures = () => {

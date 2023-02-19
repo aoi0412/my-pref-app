@@ -50,6 +50,7 @@ const styles = {
     align-items: center;
     margin: 0 24px;
     gap: 24px;
+    z-index: 1;
   `,
 }
 

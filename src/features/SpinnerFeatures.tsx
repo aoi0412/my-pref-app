@@ -1,4 +1,4 @@
-import Spinner from '@/components/elements/Spinner'
+import Spinner from '@/components/Spinner'
 
 const SpinnerFeatures = () => {
   const isVisible = true

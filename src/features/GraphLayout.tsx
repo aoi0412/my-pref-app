@@ -1,5 +1,4 @@
 import { css } from '@emotion/css'
-import GraphContainer from '../components/elements/GraphContainer'
 import GraphContainerFeatures from './GraphContainerFeatures'
 import PrefButtonList from './PrefButtonList'
 

@@ -1,4 +1,4 @@
-import AboutSite from '@/components/elements/AboutSite'
+import AboutSite from '@/components/AboutSite'
 import { useState } from 'react'
 const AboutSiteFeatures = () => {
   const isVisible = true

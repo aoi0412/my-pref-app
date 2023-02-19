@@ -1,4 +1,4 @@
-import PrefButton from '@/components/elements/PrefButton'
+import PrefButton from '@/components/PrefButton'
 import { prefButtonData } from '@/types'
 
 const PrefButtonFeatures = (data: prefButtonData) => {

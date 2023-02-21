@@ -1,3 +1,5 @@
+import { GetRecoilValue, SetRecoilState } from 'recoil'
+
 //各都道府県ボタンの状態
 export type prefButtonData = {
   isPressed: boolean
@@ -35,7 +37,7 @@ export type apiResult<T> = {
   description?: string
 }
 
-export type errorResponce = {
+export type errorResponse = {
   message: string
   statusCode: string
   description: string
@@ -60,3 +62,11 @@ export type populationResult = {
   boundaryYear: number
   data: { label: string; data: populationData[] }[]
 }
+
+export type recoilSelectSetFunc<T> = (
+  _: {
+    set: SetRecoilState
+    get: GetRecoilValue
+  },
+  newValue: T
+) => void

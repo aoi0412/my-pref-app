@@ -3,10 +3,12 @@ import styles from '@/styles/Home.module.css'
 import AboutSiteFeatures from '@/features/AboutSiteFeatures'
 import SpinnerFeatures from '@/features/SpinnerFeatures'
 import GraphLayout from '@/features/GraphLayout'
-import { getPrefList } from './api/getPrefList'
-import { getPopulation } from './api/getPopulation'
+import { getPrefList } from '../functions/api/getPrefList'
+import { getPopulation } from '../functions/api/getPopulation'
+import { useInitApp } from '@/functions/hooks/initApp'
 
 export default function Home() {
+  useInitApp()
   return (
     <>
       <Head>
@@ -22,31 +24,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <button
-          onClick={() => {
-            getPrefList({
-              ifError: (e) => {
-                console.log('Error:', e)
-              },
-              ifSuccess: (res) => {
-                console.log('Success:', res)
-                getPopulation({
-                  prefCode: res[0].prefCode,
-                  ifError: (e) => {
-                    console.log('Error:', e)
-                  },
-                  ifSuccess: (res) => {
-                    console.log('Success:', res)
-                  },
-                  after: () => {},
-                })
-              },
-              after: () => {},
-            })
-          }}
-        >
-          aiueo
-        </button>
         <div
           style={{
             backgroundColor: '#ebf3ff',

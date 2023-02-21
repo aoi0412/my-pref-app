@@ -1,13 +1,13 @@
 import {
   apiResult,
-  errorResponce,
+  errorResponse,
   populationResult,
 } from '@/types'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 
 type Props = {
   prefCode: number
-  ifError: (e: errorResponce) => void
+  ifError: (e: errorResponse) => void
   ifSuccess: (res: populationResult) => void
   after: () => void
 }

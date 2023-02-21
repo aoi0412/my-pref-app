@@ -1,40 +1,17 @@
-import { prefButtonData } from '@/types'
+import { prefDataListAtom } from '@/recoil/prefButton'
+import { prefButtonData, prefData } from '@/types'
 import { css } from '@emotion/css'
+import { useRecoilValue } from 'recoil'
 import PrefButtonFeatures from './PrefButtonFeatures'
 
 const PrefButtonList = () => {
-  const list: prefButtonData[] = [
-    {
-      isPressed: true,
-      prefName: '都道府県ボタン１',
-      isVisible: true,
-      prefCode: 0,
-    },
-    {
-      isPressed: false,
-      prefName: '都道府県ボタン2',
-      isVisible: true,
-      prefCode: 0,
-    },
-    {
-      isPressed: true,
-      prefName: '都道府県ボタンaaaaaaa',
-      isVisible: true,
-      prefCode: 0,
-    },
-    {
-      isPressed: false,
-      prefName: '都道府',
-      isVisible: true,
-      prefCode: 0,
-    },
-  ]
+  const prefDataList = useRecoilValue(prefDataListAtom)
   return (
     <div className={styles.listContainer}>
-      {list.map((prefData: prefButtonData) => (
+      {prefDataList.map((prefData: prefData) => (
         <PrefButtonFeatures
+          buttonId={prefData.prefCode}
           key={prefData.prefCode}
-          {...prefData}
         />
       ))}
     </div>

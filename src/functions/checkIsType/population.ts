@@ -1,8 +1,6 @@
 import { populationData, populationResult } from '@/types'
 
-export const isPopulationResult = (
-  data: object
-): data is populationResult => {
+export const isPopulationResult = (data: object): data is populationResult => {
   return (
     'boundaryYear' in data &&
     typeof data.boundaryYear === 'number' &&
@@ -16,13 +14,6 @@ export const isPopulationResult = (
   )
 }
 
-export const isPopulationData = (
-  data: any
-): data is populationData => {
-  return (
-    'year' in data &&
-    'value' in data &&
-    typeof data.year === 'string' &&
-    typeof data.value === 'number'
-  )
+export const isPopulationData = (data: any): data is populationData => {
+  return 'year' in data && 'value' in data && typeof data.year === 'number' && typeof data.value === 'number'
 }

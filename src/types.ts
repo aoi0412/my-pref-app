@@ -24,10 +24,6 @@ export type selectedPref = {
   prefCode: number
 }
 
-export type populationTypeList = string[]
-
-export type selectedPopulationType = string
-
 //APIのレスポンスデータ形式
 
 export type apiResult<T> = {

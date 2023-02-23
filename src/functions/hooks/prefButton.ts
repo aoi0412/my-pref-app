@@ -1,14 +1,15 @@
 import { currentTypeAtom, gainedPrefListAtom, graphDataAtom } from '@/recoil/graph'
 import { prefButtonDataAtom, selectedPrefAtom } from '@/recoil/prefButton'
 import { graphData, prefButtonData, prefData } from '@/types'
+import { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { getPopulation } from '../api/getPopulation'
+import { isPopulationResult } from '../checkIsType/population'
 
 export const usePrefButton = (buttonId: number): [prefButtonData, () => void] => {
   const [data, setData] = useRecoilState(prefButtonDataAtom(buttonId))
   const [gainedPrefList, setGainedPrefList] = useRecoilState(gainedPrefListAtom)
-  const currentType = useRecoilValue(currentTypeAtom)
-  const [graphData, setGraphData] = useRecoilState(graphDataAtom(currentType ? currentType : ''))
+  const [graphData, setGraphData] = useRecoilState(graphDataAtom)
   const [selectedPrefList, setSelectedPrefList] = useRecoilState(selectedPrefAtom)
   const onPress = () => {
     // 人口構成データを取得していなかった場合APIを叩いてデータを格納する
@@ -45,11 +46,10 @@ export const usePrefButton = (buttonId: number): [prefButtonData, () => void] =>
       setSelectedPrefList(tmp)
     }
 
-    // console.log('data:', data)
-    // console.log('gainedPrefList', gainedPrefList)
-    // console.log('currentType', currentType)
-    // console.log('graphData', graphData)
-    // console.log('selectedPrefList', selectedPrefList)
+    console.log('data:', data)
+    console.log('gainedPrefList', gainedPrefList)
+    console.log('graphData', graphData)
+    console.log('selectedPrefList', selectedPrefList)
   }
 
   return [data, onPress]
@@ -60,23 +60,35 @@ type Props = {
   graphData: graphData[]
   setGraphData: (data: graphData[]) => void
 }
+
 const getPopulationData = ({ prefData, graphData, setGraphData }: Props) => {
-  const population = getPopulation({
-    prefCode: prefData.prefCode,
+  getPopulation(
+    prefData.prefCode
     //TODO:エラーハンドリング
-    ifError: (error) => {
-      console.error('Error:', error.message)
-    },
-    after: () => {},
+  ).then((data) => {
+    if (isPopulationResult(data)) {
+      const typeData = data.data[0]
+      console.log('typeData is', typeData)
+      let tmpGraphData: graphData[] = []
+      if (graphData.length === 0) {
+        typeData.data.forEach((popData) => {
+          let tmp: graphData = {
+            year: popData.year,
+          }
+          tmp[prefData.prefName] = popData.value
+          tmpGraphData.push(tmp)
+        })
+      } else {
+        graphData.forEach((popData) => {
+          let tmp: graphData = { ...popData }
+          const value = typeData.data.find((_) => _.year === popData.year)?.value
+          tmp[prefData.prefName] = value ? value : 0
+          tmpGraphData.push(tmp)
+        })
+      }
+      setGraphData(tmpGraphData)
+    } else {
+      console.log('setError')
+    }
   })
-  console.log('population is', population)
-  if (typeof population !== 'undefined') {
-    let tmp: graphData[] = [...graphData]
-    population.data.forEach((typeData) => {
-      tmp.forEach((data, index) => {
-        data[prefData.prefName] = typeData.data[index].value
-      })
-      setGraphData(tmp)
-    })
-  }
 }

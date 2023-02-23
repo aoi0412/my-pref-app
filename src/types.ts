@@ -8,16 +8,17 @@ export type prefButtonData = {
   prefCode: number
 }
 
-//グラフで表示する単一データ
+// 表示するグラフデータ
 export type graphData = {
-  year: number
-  [prefName: string]: number
+  labels: number[]
+  datasets: dataset[]
+}
+export type dataset = {
+  label: string
+  data: number[]
 }
 
-export type populationTypeData = {
-  type: string
-  data: graphData[]
-}
+export type populationType = string
 
 export type selectedPref = {
   prefName: string
@@ -25,7 +26,6 @@ export type selectedPref = {
 }
 
 //APIのレスポンスデータ形式
-
 export type apiResult<T> = {
   message: string
   result?: T

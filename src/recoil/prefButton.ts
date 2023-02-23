@@ -1,18 +1,11 @@
 import { isPrefData } from '@/functions/checkIsType/prefButton'
 import { atom, atomFamily, selector } from 'recoil'
-import {
-  prefButtonData,
-  prefData,
-  recoilSelectSetFunc,
-} from '../types'
+import { prefButtonData, prefData, recoilSelectSetFunc } from '../types'
 
 type buttonId = number
 
 // 各ボタンの状態を管理
-export const prefButtonDataAtom = atomFamily<
-  prefButtonData,
-  buttonId
->({
+export const prefButtonDataAtom = atomFamily<prefButtonData, buttonId>({
   key: 'prefButtonDataAtom',
   default: {
     isVisible: false,
@@ -35,23 +28,17 @@ export const prefDataListAtom = atom<prefData[]>({
 })
 
 // 都道府県ボタンが押されたときに選択済み都道府県とボタン情報を変更する
-export const selectedPrefButtonSelector = selector<
-  prefData[]
->({
+export const selectedPrefButtonSelector = selector<prefData[]>({
   key: 'pressPrefButtonSelector',
   get: ({ get }) => {
     return get(selectedPrefAtom)
   },
   set: ({ set, get }, newValue) => {
     if (isPrefData(newValue)) {
-      let buttonData = get(
-        prefButtonDataAtom(newValue.prefCode)
-      )
+      let buttonData = get(prefButtonDataAtom(newValue.prefCode))
       let tmp = get(selectedPrefAtom)
       if (buttonData.isPressed) {
-        tmp.filter(
-          (data) => data.prefCode === newValue.prefCode
-        )
+        tmp = tmp.filter((data) => data.prefCode === newValue.prefCode)
       } else {
         tmp.push(newValue)
       }
@@ -89,15 +76,11 @@ export const prefDataListSelector = selector<prefData[]>({
 })
 
 // すべての都道府県ボタンの表示・非表示の切り替え
-export const changePrefButtonListView: recoilSelectSetFunc<
-  boolean
-> = ({ set, get }, newValue) => {
+export const changePrefButtonListView: recoilSelectSetFunc<boolean> = ({ set, get }, newValue) => {
   console.log('set is', !newValue)
   console.log('prefDataList is', get(prefDataListAtom))
   get(prefDataListAtom).forEach((prefData) => {
-    const prefButtonData: prefButtonData = get(
-      prefButtonDataAtom(prefData.prefCode)
-    )
+    const prefButtonData: prefButtonData = get(prefButtonDataAtom(prefData.prefCode))
     set(prefButtonDataAtom(prefData.prefCode), {
       ...prefButtonData,
       isVisible: newValue as boolean,

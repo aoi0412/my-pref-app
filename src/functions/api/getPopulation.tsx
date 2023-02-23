@@ -35,7 +35,6 @@ export const getPopulation = async (prefCode: number): Promise<errorResponse | p
           result = res.data.result
         }
       }
-      return 'error'
     })
     .catch((e: AxiosError<{ error: string }>) => {
       return {

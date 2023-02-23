@@ -24,16 +24,25 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main
+        className={styles.main}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: '#ebf3ff',
+          display: 'flex',
+          position: 'relative',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <div
           style={{
-            backgroundColor: '#ebf3ff',
-            width: '100vw',
-            height: '100vh',
             display: 'flex',
             position: 'relative',
             alignItems: 'center',
             justifyContent: 'center',
+            maxWidth: '800px',
           }}
         >
           <div

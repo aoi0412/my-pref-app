@@ -41,6 +41,8 @@ const styles = {
     transition: all 0.3s ease-in-out;
     padding: 12px;
     border-radius: 12px;
+    width: 100%;
+    height: 300px;
     box-shadow: ${isVisible
         ? '12px 12px 29px #d0d3d7'
         : 'none'},
@@ -53,6 +55,8 @@ const styles = {
   selectedContainer: (isVisible: boolean) => css`
     transition: all 0.3s ease-in-out;
     opacity: ${isVisible ? 1 : 0};
+    height: 100%;
+    aspect-ratio: 1.8;
   `,
   unSelectedContainer: (
     isVisible: boolean,

@@ -1,10 +1,12 @@
 import { apiResult, errorResponse, prefData } from '@/types'
 import { ifError } from 'assert'
 import axios, { AxiosError, AxiosResponse } from 'axios'
+import { after } from 'node:test'
 
 type Props = {
   ifError: (e: errorResponse) => void
   ifSuccess: (res: prefData[]) => void
+  after: () => void
 }
 
 export const getPrefList = (result: Props) => {
@@ -39,12 +41,13 @@ export const getPrefList = (result: Props) => {
         }
       })
       .catch((e: AxiosError<{ error: string }>) => {
-        ifError({
+        result.ifError({
           statusCode: e.code ? e.code : '',
           message: e.message,
           description: '',
         })
       })
+      .finally(result.after)
   } else {
     result.ifError({
       statusCode: '',

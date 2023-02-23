@@ -1,5 +1,6 @@
 import PrefButton from '@/components/PrefButton'
 import { prefButtonDataAtom } from '@/recoil/prefButton'
+import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 type Props = {
@@ -11,7 +12,7 @@ const PrefButtonFeatures = ({ buttonId }: Props) => {
   const [data, setData] = useRecoilState(
     prefButtonDataAtom(buttonId)
   )
-  console.log('button', buttonId, 'is:', data)
+  useEffect
   return <PrefButton {...data}>{data.prefName}</PrefButton>
 }
 

@@ -8,7 +8,8 @@ import { getPopulation } from '../functions/api/getPopulation'
 import { useInitApp } from '@/functions/hooks/initApp'
 
 export default function Home() {
-  useInitApp()
+  const isLoading = useInitApp()
+  console.log('issssss', isLoading)
   return (
     <>
       <Head>

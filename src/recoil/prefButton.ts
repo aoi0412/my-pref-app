@@ -33,9 +33,11 @@ export const prefDataListSelector = selector<prefData[]>({
   get: ({ get }) => {
     return get(prefDataListAtom)
   },
-  set: ({ set }, newValue) => {
+  set: ({ set, get }, newValue) => {
     if (Array.isArray(newValue)) {
+      console.log('runned', newValue)
       set(prefDataListAtom, newValue)
+
       newValue.forEach((prefData) => {
         const tmp: prefButtonData = {
           isPressed: false,
@@ -53,6 +55,8 @@ export const prefDataListSelector = selector<prefData[]>({
 export const changePrefButtonListView: recoilSelectSetFunc<
   boolean
 > = ({ set, get }, newValue) => {
+  console.log('set is', !newValue)
+  console.log('prefDataList is', get(prefDataListAtom))
   get(prefDataListAtom).forEach((prefData) => {
     const prefButtonData: prefButtonData = get(
       prefButtonDataAtom(prefData.prefCode)

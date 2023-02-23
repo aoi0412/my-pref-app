@@ -1,9 +1,10 @@
 import Spinner from '@/components/Spinner'
-import { isLoadingSelector } from '@/recoil/isLoading'
+import { isLoadingAtom } from '@/recoil/isLoading'
 import { useRecoilValue } from 'recoil'
 
 const SpinnerFeatures = () => {
-  const isVisible = useRecoilValue(isLoadingSelector)
+  const isVisible = useRecoilValue(isLoadingAtom)
+  console.log('isLoading', isVisible)
   return <Spinner isVisible={isVisible} size={120} />
 }
 

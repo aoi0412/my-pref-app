@@ -4,15 +4,20 @@ import {
   populationResult,
 } from '@/types'
 import axios, { AxiosError, AxiosResponse } from 'axios'
+import {
+  isPopulationData,
+  isPopulationResult,
+} from '../checkIsType/population'
 
 type Props = {
   prefCode: number
   ifError: (e: errorResponse) => void
-  ifSuccess: (res: populationResult) => void
   after: () => void
 }
 
-export const getPopulation = (props: Props) => {
+export const getPopulation = (
+  props: Props
+): populationResult | undefined => {
   const url = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${props.prefCode}`
   if (process.env.NEXT_PUBLIC_RESAS_API_KEY) {
     axios
@@ -42,7 +47,8 @@ export const getPopulation = (props: Props) => {
             })
           }
           if (res.data.result) {
-            props.ifSuccess(res.data.result)
+            if (isPopulationResult(res.data.result))
+              return res.data.result
           }
         }
       )
@@ -60,4 +66,5 @@ export const getPopulation = (props: Props) => {
       description: '正しいAPIキーを設定してください',
     })
   }
+  return undefined
 }

@@ -1,3 +1,4 @@
+import { isPrefData } from '@/functions/checkIsType/prefButton'
 import { atom, atomFamily, selector } from 'recoil'
 import {
   prefButtonData,
@@ -21,10 +22,46 @@ export const prefButtonDataAtom = atomFamily<
   },
 })
 
+//選択されている都道府県ボタンを管理
+export const selectedPrefAtom = atom<prefData[]>({
+  key: 'selectedPrefAtom',
+  default: [],
+})
+
 // 都道府県データ一覧を管理
 export const prefDataListAtom = atom<prefData[]>({
   key: 'prefDataListAtom',
   default: [],
+})
+
+// 都道府県ボタンが押されたときに選択済み都道府県とボタン情報を変更する
+export const selectedPrefButtonSelector = selector<
+  prefData[]
+>({
+  key: 'pressPrefButtonSelector',
+  get: ({ get }) => {
+    return get(selectedPrefAtom)
+  },
+  set: ({ set, get }, newValue) => {
+    if (isPrefData(newValue)) {
+      let buttonData = get(
+        prefButtonDataAtom(newValue.prefCode)
+      )
+      let tmp = get(selectedPrefAtom)
+      if (buttonData.isPressed) {
+        tmp.filter(
+          (data) => data.prefCode === newValue.prefCode
+        )
+      } else {
+        tmp.push(newValue)
+      }
+      set(prefButtonDataAtom(newValue.prefCode), {
+        ...buttonData,
+        isPressed: !buttonData.isPressed,
+      })
+      set(selectedPrefAtom, tmp)
+    }
+  },
 })
 
 // 都道府県データ一覧が変更されたときボタンデータを追加する

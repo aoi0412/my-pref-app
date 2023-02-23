@@ -11,7 +11,7 @@ export type prefButtonData = {
 //グラフで表示する単一データ
 export type graphData = {
   year: number
-  ['prefName']: number
+  [prefName: string]: number
 }
 
 export type populationTypeData = {

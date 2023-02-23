@@ -1,24 +1,14 @@
+import { prefButtonData } from '@/types'
 import { css, cx } from '@emotion/css'
-import { Inter } from '@next/font/google'
 type PrefButtonProps = {
-  props?: React.ComponentProps<'button'>
-  isVisible?: boolean
-  color?: string
-  isPressed?: boolean
-  children: string
+  data: prefButtonData
+  onPress: () => void
 }
-const PrefButton = ({
-  props,
-  isPressed = false,
-  isVisible = false,
-  children,
-}: PrefButtonProps) => {
+const PrefButton = ({ data, onPress }: PrefButtonProps) => {
   return (
-    <button className={styles.button(isVisible)} {...props}>
-      <div className={styles.inner(isPressed, isVisible)}>
-        <p className={styles.mountColor(isVisible)}>
-          {children}
-        </p>
+    <button className={styles.button(data.isVisible)} onClick={onPress}>
+      <div className={styles.inner(data.isPressed, data.isVisible)}>
+        <p className={styles.mountColor(data.isVisible)}>{data.prefName}</p>
       </div>
     </button>
   )
@@ -34,10 +24,7 @@ const styles = {
     opacity: 0.67;
     font-size: 16px;
     color: rgba(146, 152, 165, 0.67);
-    box-shadow: ${isVisible
-        ? '8px 8px 16px #d0d3d7'
-        : 'none'},
-      ${isVisible ? '-6px -6px 12px #ffffff' : 'none'},
+    box-shadow: ${isVisible ? '8px 8px 16px #d0d3d7' : 'none'}, ${isVisible ? '-6px -6px 12px #ffffff' : 'none'},
       ${isVisible ? '8px 8px 8px #d0d3d7' : 'none'};
     :active {
       transition: all 0.1s ease-in-out;
@@ -47,12 +34,8 @@ const styles = {
   inner: (isPressed: boolean, isVisible: boolean) => css`
     transition: all 0.3s ease-in-out;
     border-radius: 100px;
-    box-shadow: ${!isVisible && isPressed
-        ? 'inset 8px 8px 16px #d0d3d7'
-        : 'none'},
-      ${!isVisible && isPressed
-        ? 'inset -8px -8px 16px #ffffff'
-        : 'none'};
+    box-shadow: ${isVisible && isPressed ? 'inset 8px 8px 16px #d0d3d7' : 'none'},
+      ${isVisible && isPressed ? 'inset -8px -8px 16px #ffffff' : 'none'};
   `,
   mountColor: (isVisible: boolean) => css`
     transition: all 0.3s ease-in-out;

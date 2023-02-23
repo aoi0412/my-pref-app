@@ -1,19 +1,18 @@
+import { button } from '@/components/Button.stories'
 import PrefButton from '@/components/PrefButton'
+import { usePrefButton } from '@/functions/hooks/prefButton'
+import { addDataSelector } from '@/recoil/graph'
 import { prefButtonDataAtom } from '@/recoil/prefButton'
 import { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 type Props = {
   buttonId: number
 }
 
 const PrefButtonFeatures = ({ buttonId }: Props) => {
-  //TODO 個別にボタンを変更する関数をここに置く
-  const [data, setData] = useRecoilState(
-    prefButtonDataAtom(buttonId)
-  )
-  useEffect
-  return <PrefButton {...data}>{data.prefName}</PrefButton>
+  const [data, onPress] = usePrefButton(buttonId)
+  return <PrefButton data={data} onPress={onPress} />
 }
 
 export default PrefButtonFeatures

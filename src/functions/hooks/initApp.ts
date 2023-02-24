@@ -1,17 +1,9 @@
 import { errorSelector } from '@/recoil/error'
 import { isLoadingAtom } from '@/recoil/isLoading'
-import {
-  prefButtonDataAtom,
-  prefDataListAtom,
-  prefDataListSelector,
-} from '@/recoil/prefButton'
+import { prefButtonDataAtom, prefDataListAtom, prefDataListSelector } from '@/recoil/prefButton'
 import { prefButtonData } from '@/types'
 import { useEffect } from 'react'
-import {
-  selector,
-  useRecoilState,
-  useSetRecoilState,
-} from 'recoil'
+import { selector, useRecoilState, useSetRecoilState } from 'recoil'
 import { getPrefList } from '../api/getPrefList'
 
 export const useInitApp = () => {
@@ -20,19 +12,14 @@ export const useInitApp = () => {
     key: 'changeButtonListVisible',
     get: ({ get }) => {
       const tmp = get(isLoadingAtom)
-      console.log('get is', tmp)
       return false
     },
     set: ({ set, get }, newValue) => {
-      console.log('arejaiofwass')
-
       set(isLoadingAtom, newValue)
       //すべての都道府県ボタンコンポーネントを表示・非表示
       // changePrefButtonListView({ get, set }, !newValue)
       get(prefDataListAtom).forEach((prefData) => {
-        const prefButtonData: prefButtonData = get(
-          prefButtonDataAtom(prefData.prefCode)
-        )
+        const prefButtonData: prefButtonData = get(prefButtonDataAtom(prefData.prefCode))
         set(prefButtonDataAtom(prefData.prefCode), {
           ...prefButtonData,
           isVisible: !newValue as boolean,
@@ -42,12 +29,8 @@ export const useInitApp = () => {
   })
 
   const [a, b] = useRecoilState(isLoadingAtom)
-  const [isLoading, setIsLoading] = useRecoilState(
-    isLoadingSelector
-  )
-  const setPrefDataList = useSetRecoilState(
-    prefDataListSelector
-  )
+  const [isLoading, setIsLoading] = useRecoilState(isLoadingSelector)
+  const setPrefDataList = useSetRecoilState(prefDataListSelector)
   const setError = useSetRecoilState(errorSelector)
   useEffect(() => {
     setIsLoading(true)
@@ -59,7 +42,6 @@ export const useInitApp = () => {
       ifSuccess: (res) => {
         setPrefDataList(res)
         setTimeout(() => {
-          console.log('aiueo', isLoading, ':aa', a)
           setIsLoading(false)
         }, 1000)
       },

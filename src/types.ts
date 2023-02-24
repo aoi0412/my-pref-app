@@ -8,28 +8,32 @@ export type prefButtonData = {
   prefCode: number
 }
 
-//グラフで表示する単一データ
-export type graphData = {
-  year: number
-  ['prefName']: number
+export type prefPopulationData = {
+  [populationType: string]: dataset
 }
 
-export type populationTypeData = {
-  type: string
-  data: graphData[]
+// 表示するグラフデータ
+export type graphData = {
+  labels: number[]
+  datasets: dataset[]
 }
+
+// label:都道府県名
+export type dataset = {
+  label: string
+  data: number[]
+  borderColor: string
+  backgroundColor: string
+}
+
+export type populationType = string
 
 export type selectedPref = {
   prefName: string
   prefCode: number
 }
 
-export type populationTypeList = string[]
-
-export type selectedPopulationType = string
-
 //APIのレスポンスデータ形式
-
 export type apiResult<T> = {
   message: string
   result?: T

@@ -20,7 +20,8 @@ const PrefButtonList = () => {
 
 const styles = {
   listContainer: css`
-    width: 100%;
+    overflow-y: scroll;
+    height: 80vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

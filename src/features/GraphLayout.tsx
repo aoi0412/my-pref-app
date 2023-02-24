@@ -5,8 +5,8 @@ import PrefButtonList from './PrefButtonList'
 const GraphLayout = () => {
   return (
     <div className={styles.container}>
-      <GraphContainerFeatures />
       <PrefButtonList />
+      <GraphContainerFeatures />
     </div>
   )
 }
@@ -15,7 +15,7 @@ const styles = {
   container: css`
     padding: 24px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 24px;
   `,
 }

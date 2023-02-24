@@ -3,13 +3,10 @@ import styles from '@/styles/Home.module.css'
 import AboutSiteFeatures from '@/features/AboutSiteFeatures'
 import SpinnerFeatures from '@/features/SpinnerFeatures'
 import GraphLayout from '@/features/GraphLayout'
-import { getPrefList } from '../functions/api/getPrefList'
-import { getPopulation } from '../functions/api/getPopulation'
 import { useInitApp } from '@/functions/hooks/initApp'
 
 export default function Home() {
   const isLoading = useInitApp()
-  console.log('issssss', isLoading)
   return (
     <>
       <Head>
@@ -24,16 +21,25 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
+      <main
+        className={styles.main}
+        style={{
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: '#ebf3ff',
+          display: 'flex',
+          position: 'relative',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
         <div
           style={{
-            backgroundColor: '#ebf3ff',
-            width: '100vw',
-            height: '100vh',
             display: 'flex',
             position: 'relative',
             alignItems: 'center',
             justifyContent: 'center',
+            maxWidth: '800px',
           }}
         >
           <div

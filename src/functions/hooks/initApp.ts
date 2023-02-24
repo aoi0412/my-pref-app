@@ -1,4 +1,6 @@
+import { aboutSiteIsVisibleAtom } from '@/recoil/aboutSite'
 import { errorSelector } from '@/recoil/error'
+import { graphIsVisibleAtom } from '@/recoil/graph'
 import { isLoadingAtom } from '@/recoil/isLoading'
 import { prefButtonDataAtom, prefDataListAtom, prefDataListSelector } from '@/recoil/prefButton'
 import { prefButtonData } from '@/types'
@@ -17,7 +19,6 @@ export const useInitApp = () => {
     set: ({ set, get }, newValue) => {
       set(isLoadingAtom, newValue)
       //すべての都道府県ボタンコンポーネントを表示・非表示
-      // changePrefButtonListView({ get, set }, !newValue)
       get(prefDataListAtom).forEach((prefData) => {
         const prefButtonData: prefButtonData = get(prefButtonDataAtom(prefData.prefCode))
         set(prefButtonDataAtom(prefData.prefCode), {
@@ -25,10 +26,15 @@ export const useInitApp = () => {
           isVisible: !newValue as boolean,
         })
       })
+
+      //グラフを表示・非表示
+      set(graphIsVisibleAtom, !newValue)
+
+      //サイトについてボタンを表示・非表示
+      set(aboutSiteIsVisibleAtom, !newValue)
     },
   })
 
-  const [a, b] = useRecoilState(isLoadingAtom)
   const [isLoading, setIsLoading] = useRecoilState(isLoadingSelector)
   const setPrefDataList = useSetRecoilState(prefDataListSelector)
   const setError = useSetRecoilState(errorSelector)

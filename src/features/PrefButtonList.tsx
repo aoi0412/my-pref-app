@@ -1,13 +1,15 @@
+import { aboutSiteIsVisibleAtom } from '@/recoil/aboutSite'
 import { prefDataListAtom } from '@/recoil/prefButton'
-import { prefButtonData, prefData } from '@/types'
+import { prefData } from '@/types'
 import { css } from '@emotion/css'
 import { useRecoilValue } from 'recoil'
 import PrefButtonFeatures from './PrefButtonFeatures'
 
 const PrefButtonList = () => {
   const prefDataList = useRecoilValue(prefDataListAtom)
+  const isVisible = useRecoilValue(aboutSiteIsVisibleAtom)
   return (
-    <div className={styles.scrollContainer}>
+    <div className={styles.scrollContainer(isVisible)}>
       <div className={styles.listContainer}>
         {prefDataList.map((prefData: prefData) => (
           <PrefButtonFeatures buttonId={prefData.prefCode} key={prefData.prefCode} />
@@ -18,17 +20,18 @@ const PrefButtonList = () => {
 }
 
 const styles = {
-  scrollContainer: css`
+  scrollContainer: (isVisible: boolean) => css`
     width: 90vw;
     overflow-y: hidden;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; /* IE, Edge 対応 */
+    -ms-overflow-style: none;
     scrollbar-width: thin;
     scrollbar-color: #17585d #ccc;
     z-index: 1000;
     padding: 24px;
     scroll-behavior: smooth;
+    opacity: ${isVisible ? 1 : 0};
 
     ::-webkit-scrollbar {
       width: 16px;
@@ -52,7 +55,7 @@ const styles = {
     }
   `,
   listContainer: css`
-    width: 1500px;
+    width: 1900px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

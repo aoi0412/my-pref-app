@@ -1,6 +1,11 @@
 import { graphData, populationType, prefData } from '@/types'
 import { atom, atomFamily } from 'recoil'
 
+export const graphIsVisibleAtom = atom<boolean>({
+  key: 'graphIsVisibleAtom',
+  default: false,
+})
+
 export const graphDataAtomFamily = atomFamily<graphData, populationType>({
   key: 'graphDataAtom',
   default: {

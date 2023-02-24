@@ -8,25 +8,12 @@ type Props = {
   children: ReactNode
 }
 
-const GraphContainer = ({
-  isVisible,
-  selectedAnyPref,
-  children,
-}: Props) => {
+const GraphContainer = ({ isVisible, selectedAnyPref, children }: Props) => {
   return (
     <div className={styles.container(isVisible)}>
-      <div className={styles.selectedContainer(isVisible)}>
-        {children}
-      </div>
-      <div
-        className={styles.unSelectedContainer(
-          isVisible,
-          selectedAnyPref
-        )}
-      >
-        <p className={styles.unSelectedText}>
-          都道府県を選択してください
-        </p>
+      <div className={styles.selectedContainer(isVisible)}>{children}</div>
+      <div className={styles.unSelectedContainer(isVisible, selectedAnyPref)}>
+        <p className={styles.unSelectedText}>都道府県を選択してください</p>
       </div>
     </div>
   )
@@ -41,27 +28,19 @@ const styles = {
     transition: all 0.3s ease-in-out;
     padding: 12px;
     border-radius: 12px;
-    width: 100%;
-    height: 300px;
-    box-shadow: ${isVisible
-        ? '12px 12px 29px #d0d3d7'
-        : 'none'},
-      ${isVisible ? '-12px -12px 28px #ffffff' : 'none'},
-      ${isVisible
-        ? '0px 4px 4px rgba(0, 0, 0, 0.25)'
-        : 'none'};
+    max-width: 80vw;
+    height: 50vh;
+    box-shadow: ${isVisible ? '12px 12px 29px #d0d3d7' : 'none'}, ${isVisible ? '-12px -12px 28px #ffffff' : 'none'},
+      ${isVisible ? '0px 4px 4px rgba(0, 0, 0, 0.25)' : 'none'};
     background-color: #ebf3ff;
   `,
   selectedContainer: (isVisible: boolean) => css`
     transition: all 0.3s ease-in-out;
     opacity: ${isVisible ? 1 : 0};
     height: 100%;
-    aspect-ratio: 1.8;
+    width: 100%;
   `,
-  unSelectedContainer: (
-    isVisible: boolean,
-    isSelected: boolean
-  ) => css`
+  unSelectedContainer: (isVisible: boolean, isSelected: boolean) => css`
     width: 100%;
     height: 100%;
     padding: 12px;

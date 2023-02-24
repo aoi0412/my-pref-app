@@ -13,6 +13,8 @@ const GraphLayout = () => {
 
 const styles = {
   container: css`
+    height: 100%;
+    margin-top: 80px;
     padding: 24px;
     display: flex;
     flex-direction: column;

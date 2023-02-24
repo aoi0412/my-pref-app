@@ -1,21 +1,12 @@
-import {
-  ComponentMeta,
-  ComponentStory,
-} from '@storybook/react'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import PrefButton from './PrefButton'
 
 export default {
   title: 'Elements',
   component: PrefButton,
-  argTypes: {
-    isPressed: { control: 'boolean' },
-    children: { control: 'text' },
-  },
 } as ComponentMeta<typeof PrefButton>
 
-export const prefButton: ComponentStory<
-  typeof PrefButton
-> = (args) => (
+export const prefButton: ComponentStory<typeof PrefButton> = (args) => (
   <div
     style={{
       backgroundColor: '#ebf3ff',
@@ -25,6 +16,9 @@ export const prefButton: ComponentStory<
       justifyContent: 'center',
     }}
   >
-    <PrefButton {...args} />
+    <PrefButton
+      onPress={() => console.log('pressed!!')}
+      data={{ isPressed: false, isVisible: true, prefName: 'aiueo', prefCode: 12 }}
+    />
   </div>
 )

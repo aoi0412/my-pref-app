@@ -1,7 +1,5 @@
 import { apiResult, errorResponse, prefData } from '@/types'
-import { ifError } from 'assert'
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { after } from 'node:test'
 
 type Props = {
   ifError: (e: errorResponse) => void
@@ -10,14 +8,12 @@ type Props = {
 }
 
 export const getPrefList = (result: Props) => {
-  const url =
-    'https://opendata.resas-portal.go.jp/api/v1/prefectures'
+  const url = 'https://opendata.resas-portal.go.jp/api/v1/prefectures'
   if (process.env.NEXT_PUBLIC_RESAS_API_KEY) {
     return axios
       .get(url, {
         headers: {
-          'X-API-KEY':
-            process.env.NEXT_PUBLIC_RESAS_API_KEY,
+          'X-API-KEY': process.env.NEXT_PUBLIC_RESAS_API_KEY,
         },
       })
       .then((res: AxiosResponse<apiResult<prefData[]>>) => {
@@ -31,9 +27,7 @@ export const getPrefList = (result: Props) => {
           result.ifError({
             statusCode: res.data.statusCode,
             message: res.data.message,
-            description: res.data.description
-              ? res.data.description
-              : '',
+            description: res.data.description ? res.data.description : '',
           })
         }
         if (res.data.result) {

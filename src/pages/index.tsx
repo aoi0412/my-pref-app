@@ -6,7 +6,7 @@ import GraphLayout from '@/features/GraphLayout'
 import { useInitApp } from '@/functions/hooks/initApp'
 
 export default function Home() {
-  const isLoading = useInitApp()
+  useInitApp()
   return (
     <>
       <Head>

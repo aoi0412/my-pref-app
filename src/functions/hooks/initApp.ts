@@ -35,7 +35,6 @@ export const useInitApp = () => {
     },
   })
 
-  const [a, b] = useRecoilState(isLoadingAtom)
   const [isLoading, setIsLoading] = useRecoilState(isLoadingSelector)
   const setPrefDataList = useSetRecoilState(prefDataListSelector)
   const setError = useSetRecoilState(errorSelector)

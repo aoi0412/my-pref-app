@@ -1,6 +1,6 @@
 import { aboutSiteIsVisibleAtom } from '@/recoil/aboutSite'
 import { prefDataListAtom } from '@/recoil/prefButton'
-import { prefButtonData, prefData } from '@/types'
+import { prefData } from '@/types'
 import { css } from '@emotion/css'
 import { useRecoilValue } from 'recoil'
 import PrefButtonFeatures from './PrefButtonFeatures'
@@ -25,7 +25,7 @@ const styles = {
     overflow-y: hidden;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; /* IE, Edge 対応 */
+    -ms-overflow-style: none;
     scrollbar-width: thin;
     scrollbar-color: #17585d #ccc;
     z-index: 1000;

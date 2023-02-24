@@ -1,14 +1,7 @@
-import {
-  currentGraphDataAtom,
-  currentTypeAtom,
-  gainedPrefListAtom,
-  yearLabelListAtom,
-  // setPrefPopulationDataSelector,
-} from '@/recoil/graph'
+import { currentGraphDataAtom, currentTypeAtom, gainedPrefListAtom, yearLabelListAtom } from '@/recoil/graph'
 import { prefButtonDataAtom, prefPopulationDataAtomFamily, selectedPrefAtom } from '@/recoil/prefButton'
 import { populationResult, prefButtonData, prefData, prefPopulationData } from '@/types'
-import { useEffect } from 'react'
-import { useRecoilCallback, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilCallback, useRecoilState, useRecoilValue } from 'recoil'
 import { getPopulation } from '../api/getPopulation'
 import { isPopulationResult } from '../checkIsType/population'
 import { isPrefData } from '../checkIsType/prefButton'

@@ -1,5 +1,5 @@
 import { prefButtonData } from '@/types'
-import { css, cx } from '@emotion/css'
+import { css } from '@emotion/css'
 type PrefButtonProps = {
   data: prefButtonData
   onPress: () => void

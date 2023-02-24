@@ -1,6 +1,6 @@
 import { isPrefData } from '@/functions/checkIsType/prefButton'
 import { atom, atomFamily, selector } from 'recoil'
-import { prefButtonData, prefData, recoilSelectSetFunc } from '../types'
+import { prefButtonData, prefData, prefPopulationData, recoilSelectSetFunc } from '../types'
 
 type buttonId = number
 
@@ -13,6 +13,11 @@ export const prefButtonDataAtom = atomFamily<prefButtonData, buttonId>({
     prefName: '',
     prefCode: -1,
   },
+})
+
+export const prefPopulationDataAtomFamily = atomFamily<prefPopulationData, buttonId>({
+  key: 'prefPopulationDataAtomFamily',
+  default: {},
 })
 
 //選択されている都道府県ボタンを管理
@@ -59,7 +64,6 @@ export const prefDataListSelector = selector<prefData[]>({
   },
   set: ({ set, get }, newValue) => {
     if (Array.isArray(newValue)) {
-      console.log('runned', newValue)
       set(prefDataListAtom, newValue)
 
       newValue.forEach((prefData) => {
@@ -77,8 +81,6 @@ export const prefDataListSelector = selector<prefData[]>({
 
 // すべての都道府県ボタンの表示・非表示の切り替え
 export const changePrefButtonListView: recoilSelectSetFunc<boolean> = ({ set, get }, newValue) => {
-  console.log('set is', !newValue)
-  console.log('prefDataList is', get(prefDataListAtom))
   get(prefDataListAtom).forEach((prefData) => {
     const prefButtonData: prefButtonData = get(prefButtonDataAtom(prefData.prefCode))
     set(prefButtonDataAtom(prefData.prefCode), {

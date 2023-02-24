@@ -8,14 +8,22 @@ export type prefButtonData = {
   prefCode: number
 }
 
+export type prefPopulationData = {
+  [populationType: string]: dataset
+}
+
 // 表示するグラフデータ
 export type graphData = {
   labels: number[]
   datasets: dataset[]
 }
+
+// label:都道府県名
 export type dataset = {
   label: string
   data: number[]
+  borderColor: string
+  backgroundColor: string
 }
 
 export type populationType = string

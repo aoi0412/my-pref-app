@@ -16,7 +16,6 @@ export const getPopulation = async (prefCode: number): Promise<errorResponse | p
       },
     })
     .then((res: AxiosResponse<apiResult<populationResult>>) => {
-      console.log('res is', res)
       if (res.status !== 200) {
         return {
           statusCode: `${res.status}`,

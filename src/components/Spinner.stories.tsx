@@ -1,7 +1,4 @@
-import {
-  ComponentMeta,
-  ComponentStory,
-} from '@storybook/react'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 import Spinner from './Spinner'
 
@@ -14,9 +11,7 @@ export default {
   },
 } as ComponentMeta<typeof Spinner>
 
-export const spinner: ComponentStory<typeof Spinner> = (
-  args
-) => (
+export const spinner: ComponentStory<typeof Spinner> = (args) => (
   <div
     style={{
       backgroundColor: '#ebf3ff',

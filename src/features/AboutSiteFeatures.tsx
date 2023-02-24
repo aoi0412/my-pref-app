@@ -1,7 +1,9 @@
 import AboutSite from '@/components/AboutSite'
+import { aboutSiteIsVisibleAtom } from '@/recoil/aboutSite'
 import { useState } from 'react'
+import { useRecoilValue } from 'recoil'
 const AboutSiteFeatures = () => {
-  const isVisible = true
+  const isVisible = useRecoilValue(aboutSiteIsVisibleAtom)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const text = 'fjeiwoajfowia'
   return (

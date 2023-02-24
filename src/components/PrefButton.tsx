@@ -40,7 +40,7 @@ const styles = {
   mountColor: (isVisible: boolean) => css`
     transition: all 0.3s ease-in-out;
     opacity: ${isVisible ? 1 : 0};
-    padding: 12px 24px;
+    padding: 8px 20px;
     margin: 0;
     font-weight: bold;
     border-radius: 100px;

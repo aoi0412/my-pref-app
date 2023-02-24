@@ -1,5 +1,11 @@
 import GraphContainer from '@/components/GraphContainer'
-import { currentGraphDataAtom, currentTypeAtom, graphDataAtomFamily, populationTypeListAtom } from '@/recoil/graph'
+import {
+  currentGraphDataAtom,
+  currentTypeAtom,
+  graphDataAtomFamily,
+  graphIsVisibleAtom,
+  populationTypeListAtom,
+} from '@/recoil/graph'
 import { selectedPrefAtom } from '@/recoil/prefButton'
 import { useRecoilValue } from 'recoil'
 import {
@@ -26,7 +32,7 @@ const options = {
   },
 }
 const GraphContainerFeatures = () => {
-  const isVisible = true
+  const isVisible = useRecoilValue(graphIsVisibleAtom)
   const currentType = useRecoilValue(currentTypeAtom)
   const graphData = useRecoilValue(currentGraphDataAtom)
   const selectedPref = useRecoilValue(selectedPrefAtom)

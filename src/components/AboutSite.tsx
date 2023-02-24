@@ -13,7 +13,12 @@ type Props = {
 
 const AboutSite = ({ isVisible, isOpen, explanation, image, onPress, onClose }: Props) => {
   return (
-    <div className={styles.component(isOpen)}>
+    <div
+      className={styles.component(isOpen)}
+      onClick={() => {
+        if (isOpen) onClose()
+      }}
+    >
       <div onClick={onPress} className={styles.modalContainer(isVisible, isOpen)}>
         <button onClick={onClose} className={styles.closeButton(isVisible && isOpen)}>
           <CloseIcon />
@@ -31,11 +36,11 @@ const AboutSite = ({ isVisible, isOpen, explanation, image, onPress, onClose }: 
 
 const styles = {
   component: (isOpen: boolean) => css`
-    transition: all 1s ease-in-out;
-    width: 100%;
-    height: 100%;
+    transition: all ${isOpen ? '0.3s' : '1s'} ease-in-out;
+    width: 100vw;
+    height: 100vh;
     position: relative;
-    z-index: ${isOpen ? 2 : 0};
+    z-index: ${isOpen ? 2000 : 0};
   `,
   modalContainer: (isVisible: boolean, isOpen: boolean) => css`
     transition: all 0.6s ease-in-out ${isOpen ? '0s' : '0.3s'};
